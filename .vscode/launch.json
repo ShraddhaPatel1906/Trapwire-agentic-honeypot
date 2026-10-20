@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🛡️ TrapWire: Run Live Demo (CLI)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run_demo.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "🚀 TrapWire: Start FastAPI Backend",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+# TrapWire Sandboxed Execution Container
+# Designed to safely inspect untrusted URLs with zero host privilege
+FROM python:3.11-slim
+
+WORKDIR /sandbox
+
+# Install minimal security tools & browser automation
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    dnsutils \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir requests beautifulsoup4
+
+# Create non-privileged sandbox user
+RUN useradd -m -u 1001 sandboxuser
+USER sandboxuser
+
+# Sandbox execution script
+COPY sandbox_worker.py /sandbox/sandbox_worker.py
+
+ENTRYPOINT ["python", "sandbox_worker.py"]

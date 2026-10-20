@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  trapwire-core:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.sandbox
+    container_name: trapwire_sandbox_node
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    networks:
+      - trapwire_isolated_net
+
+networks:
+  trapwire_isolated_net:
+    driver: bridge
